@@ -1,0 +1,83 @@
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.form-container{
+
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+}
+
+form > h2 {
+    color: #FFF;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: sans-serif;
+}
+
+form > input {
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0 100px;
+    outline: none;
+    overflow: hidden;
+}
+
+/* Catalog */
+
+.catalog-container {
+    display: flex;
+    /* margin: 0 100px; */
+    flex-direction: row;
+    gap: 30px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+    align-items: center;
+    padding-bottom: 100px;
+}
+
+.catalog-card{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 30%;
+    align-items: center;
+    gap: 20px;
+}
+
+.img-container{
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+}
+
+.catalog-card > h3{
+    color: #FFF;
+    font-size: 2rem;
+}
+
+.catalog-card > a {
+    background: #d9a724;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 1.3rem;
+}
+
+img {
+    height: 100%;
+    width: 100%;
+}
+
+

@@ -1,0 +1,50 @@
+.logoContainer {
+    height: auto;
+    width: auto;
+    margin-left: 100px;
+}
+
+.logoContainer>a {
+    object-fit: contain;
+}
+/* 
+.heroSection {
+    position: relative;
+    height: 100vh;
+} */
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 30px;
+    align-items: center;
+
+}
+
+.list-items {
+    list-style: none;
+    color: #FFF;
+    display: flex;
+    gap: 30px;
+    font-weight: 500;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.list-items>li {
+    font-size: 1.2rem;
+    font-weight: 800;
+    font-family: 'Lato', sans-serif;
+}
+
+.list-items li:last-child {
+    margin-right: 100px;
+
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
