@@ -84,14 +84,17 @@ img {
     flex-direction: row;
     flex: 0 0 30%;
     gap: 50px;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding-bottom: 40px;
     overflow: hidden;
+    flex-wrap: wrap;
 }
 
 .card {
     border-radius: 20px;
     overflow: hidden;
+    height: 300px;
+    width: 300px;
 }
 
 .card>img {

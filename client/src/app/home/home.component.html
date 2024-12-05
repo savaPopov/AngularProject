@@ -13,21 +13,18 @@
             it
             easier for you to plan your hiking trips and enjoy the beauty of Bulgaria's nature. </p>
         <p>Choose your next hut and immerse yourself in this adventure!</p>
-        <a href="#">Catalog</a>
+        <a routerLink="/catalog">Catalog</a>
     </div>
 
     <div class="liked-posts-container">
-        <h2>Most Liked Huts</h2>
+        <h2>Recently Added Huts</h2>
         <div class="liked-Cards">
-            <div class="card">
-                <a href="#"><img src="assets/images/spano_1.jpg"></a>
-            </div>
-            <div class="card">
-                <a href="#"><img src="assets/images/spano_1.jpg"></a>
-            </div>
-            <div class="card">
-                <a href="#"><img src="assets/images/spano_1.jpg"></a>
-            </div>
+            @for (hike of hikes; track $index) {
+                <div class="card">
+                    <a routerLink="/details/:id" ><img src={{hike.imageUrl}}></a>
+                </div>
+            }
+           
         </div>
     </div>
 </div>

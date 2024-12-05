@@ -1,4 +1,3 @@
-
 <app-header></app-header>
 <main>
     <div class="form-container">
@@ -9,54 +8,19 @@
     </div>
 
     <div class="catalog-container">
+        @for (hike of hikes; track $index) {
         <div class="catalog-card">
             <div class="img-container">
-                <img src="assets/images/spano_1.jpg">
+                <img src={{hike.imageUrl}}>
             </div>
-            <h3>NameOfHut</h3>
-            <a href="#">Explore Now</a>
+            <h3>{{hike.title}}</h3>
+            <a routerLink={{hike._id}}>Explore Now</a>
         </div>
+        }
 
-        <div class="catalog-card">
-            <div class="img-container">
-                <img src="assets/images/spano_1.jpg">
-            </div>
-            <h3>NameOfHut</h3>
-            <a href="#">Explore Now</a>
-        </div>
 
-        <div class="catalog-card">
-            <div class="img-container">
-                <img src="assets/images/spano_1.jpg">
-            </div>
-            <h3>NameOfHut</h3>
-            <a href="#">Explore Now</a>
-        </div>
 
-        <div class="catalog-card">
-            <div class="img-container">
-                <img src="assets/images/spano_1.jpg">
-            </div>
-            <h3>NameOfHut</h3>
-            <a href="#">Explore Now</a>
-        </div>
 
-        <div class="catalog-card">
-            <div class="img-container">
-                <img src="assets/images/spano_1.jpg">
-            </div>
-            <h3>NameOfHut</h3>
-            <a href="#">Explore Now</a>
-        </div>
 
-        <div class="catalog-card">
-            <div class="img-container">
-                <img src="assets/images/spano_1.jpg">
-            </div>
-            <h3>NameOfHut</h3>
-            <a href="#">Explore Now</a>
-        </div>
-
-        
     </div>
 </main>
