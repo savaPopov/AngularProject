@@ -4,22 +4,50 @@
 <app-header />
 
 <div class="formContainer">
-    <form action="#">
+    <form [formGroup]="form" (ngSubmit)="login()">
         <h2>Login into your account!</h2>
 
         <div class="field">
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" required placeholder="savaqk@gmail.com">
+            <input type="email" name="email" id="email" required placeholder="savaqk@gmail.com" formControlName="email"
+                [class]="isFieldTextMissing('email') || isEmailNotValid() ? 'input-error' : '' ">
         </div>
-        <!-- <p class="input-error">There is an Error with email</p>
-        <p class="input-error">There is an Error with email</p> -->
 
+        @if(isFieldTextMissing('email')){
+        <div>
+            <p class="p-error">Email is required!</p>
+        </div>
+        }
+
+        @if(isEmailNotValid()){
+        <div>
+            <p class="p-error">Email is not valid!</p>
+        </div>
+        }
 
         <div class="field">
             <label for="password">Password</label>
-            <input type="password" name="password" id="password" required placeholder="123456789">
+            <input type="password" name="password" id="password" required placeholder="123456789"
+                formControlName="password"
+                [class]="isFieldTextMissing('password') || isMinLength() ? 'input-error' : '' ">
 
         </div>
+
+        @if(isFieldTextMissing('password')){
+        <div>
+            <p class="p-error">Password is required!</p>
+        </div>
+        }
+
+        @if(isMinLength()){
+        <div>
+            <p class="p-error">Password must be at least 5 charachters!</p>
+        </div>
+        }
+        @if(error){
+        <h3 class="p-error">{{error}}</h3>
+        }
+
 
         <input type="submit" value="Get Started">
     </form>

@@ -6,12 +6,18 @@
                 <a routerLink=""><img src="assets/images/logo.png"></a>
             </div>
             <ul class="list-items">
+                @if (isLogged) {
+                    <li><a routerLink="/add-hike">Add Hike</a></li>
+                    <li><a  (click)="logout()">Logout</a></li>
+                }@else {
+                    <li><a routerLink="/login">Login</a></li>
+                    <li><a routerLink="/register">Register</a></li>
+                }
                 <li><a href="#">About</a></li>
                 <li><a routerLink="/catalog">Catalog</a></li>
-                <li><a routerLink="/login">Login</a></li>
-                <li><a routerLink="/register">Register</a></li>
-                <li><a href="#">Logout</a></li>
-                <li><a href="#">Add Hike</a></li>
+
+
+
             </ul>
         </nav>
     </div>

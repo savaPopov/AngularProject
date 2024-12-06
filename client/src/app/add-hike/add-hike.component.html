@@ -1,0 +1,52 @@
+<!-- <div class="heroSection"> -->
+    <app-header></app-header>
+    <div class="formContainer">
+        <form [formGroup]="form" (ngSubmit)="create()">
+            <h2>Create your own Hike!</h2>
+
+            <div class="field">
+                <label for="email">Title</label>
+                <input type="email" name="email" id="email" required placeholder="savaqk@gmail.com" formControlName="title">
+            </div>
+            <!-- <p class="input-error">There is an Error with email</p>
+            <p class="input-error">There is an Error with email</p> -->
+
+
+            <div class="field">
+                <label for="password">Elavation</label>
+                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="elavation">
+
+            </div>
+
+            <div class="field">
+                <label for="password">Distance</label>
+                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="distance">
+
+            </div>
+            <div class="field">
+                <label for="password">ImageUrl</label>
+                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="imageUrl">
+
+            </div>
+            <div class="field">
+                <label for="password">Mountain</label>
+                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="mountain">
+
+            </div>
+            <div class="field">
+                <label for="password">Description</label>
+                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="description">
+
+            </div>
+            <div class="field">
+                <label for="password">Location</label>
+                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="location">
+
+            </div>
+
+            <!-- <p class="p-error">There is an Error with email</p> -->
+            <!-- <p class="p-error">There is an Error with email</p>  -->
+            <input type="submit" value="Get Started">
+        </form>
+    </div>
+<!-- </div> -->

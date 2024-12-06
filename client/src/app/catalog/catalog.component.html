@@ -3,12 +3,13 @@
     <div class="form-container">
         <form>
             <h2>Search Huts by name</h2>
-            <input type="text" id="search" placeholder="Ivan Vazov" />
+            <input name="search" type="text" id="search" placeholder="Ivan Vazov"  [(ngModel)]="searchTerm" 
+                (ngModelChange)="filterHikes()" />
         </form>
     </div>
 
     <div class="catalog-container">
-        @for (hike of hikes; track $index) {
+        @for (hike of filteredHikes; track $index) {
         <div class="catalog-card">
             <div class="img-container">
                 <img src={{hike.imageUrl}}>
