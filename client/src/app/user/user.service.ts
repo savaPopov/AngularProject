@@ -61,11 +61,9 @@ export class UserService {
         return this.http.get('http://localhost:3030/users/me', { headers });
     }
 
-    register(username: string, email: string, tel: string, password: string, rePassword: string) {
+    register(email: string, password: string,) {
 
-        return this.http
-            .post<UserForAuth>('/api/register', { username, email, tel, password, rePassword })
-            .pipe(tap((user) => this.user$$.next(user)));
+        return this.http.post<any>('http://localhost:3030/users/register', { email, password, })
     }
 
 

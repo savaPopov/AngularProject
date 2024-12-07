@@ -21,7 +21,7 @@
         <div class="liked-Cards">
             @for (hike of hikes; track $index) {
                 <div class="card">
-                    <a routerLink="/details/:id" ><img src={{hike.imageUrl}}></a>
+                    <a [routerLink]="['/catalog', hike._id]" ><img src={{hike.imageUrl}}></a>
                 </div>
             }
            

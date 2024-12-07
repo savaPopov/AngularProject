@@ -6,13 +6,23 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { AddHikeComponent } from './add-hike/add-hike.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/noauth.guard';
+import { DetailsComponent } from './details/details.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     //User routing
     { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
-    { path: 'catalog', component: CatalogComponent },
+
+    // { path: 'catalog', component: CatalogComponent },
+
+    {
+        path: 'catalog', children: [
+            { path: '', component: CatalogComponent },
+            { path: ':hikeId', component: DetailsComponent }
+        ]
+    },
+
     { path: 'add-hike', component: AddHikeComponent, canActivate: [AuthGuard] },
 
 ];
