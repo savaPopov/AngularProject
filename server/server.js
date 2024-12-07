@@ -1382,7 +1382,7 @@
                 _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
                 title: "Kozia Stena",
                 elavation: "1562",
-                distance: "3",
+                distance: "10",
                 imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuT7Nyiy9ftW61Fa-CZHOaMaS8GrO_veUnPA&s",
                 mountain: 'Stara Planina',
                 description: "Layout and capacity:\nTree storey solid-built house - 102 places\nBedrooms with 2 beds, with 4 beds and\na communal sleeping.\nProvisions: blankets, bed sheet, cooking utensils, cutlery, pots, water, park radio.\nToilet - inside the hut\nBathroom - inside the hut",

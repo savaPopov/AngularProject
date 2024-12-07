@@ -33,4 +33,8 @@ export class ApiService {
         return this.http.post<Hike>(`http://localhost:3030/data/hikes`, payload, { headers })
     }
 
+    getSingleHike(id:string){
+        return this.http.get<Hike>(`http://localhost:3030/data/hikes/${id}`)
+    }
+
 }

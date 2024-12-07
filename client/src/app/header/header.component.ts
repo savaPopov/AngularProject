@@ -16,14 +16,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     const checkLoggingStatus = this.userService.isLogged
-    console.log('ARE YOU LOGGED?', checkLoggingStatus)
+    // console.log('ARE YOU LOGGED?', checkLoggingStatus)
     this.isLogged = checkLoggingStatus;
   }
 
   logout() {
     this.userService.logout().subscribe((response) => {
-      console.log('RESPONSEEEEEEEEEEE')
-      console.log(response)
+      // console.log('RESPONSEEEEEEEEEEE')
+      // console.log(response)
       this.userService.deleteToken()
       this.router.navigate(['/']).then(() => {
         window.location.reload();
