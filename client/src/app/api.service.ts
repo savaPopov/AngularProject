@@ -33,8 +33,14 @@ export class ApiService {
         return this.http.post<Hike>(`http://localhost:3030/data/hikes`, payload, { headers })
     }
 
-    getSingleHike(id:string){
+    getSingleHike(id: string) {
         return this.http.get<Hike>(`http://localhost:3030/data/hikes/${id}`)
+    }
+
+    remove(id: string) {
+        const token = this.userService.getToken();  // Retrieve the token from local storage
+        const headers = new HttpHeaders().set('X-Authorization', `${token}`);
+        return this.http.delete(`http://localhost:3030/data/hikes/${id}`, { headers })
     }
 
 }
