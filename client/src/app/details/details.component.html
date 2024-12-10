@@ -48,8 +48,10 @@
         @if(isOwner){
         <a [routerLink]="['/edit', hike._id]">Edit</a>
         <a (click)="toggleDelete()">Delete</a>
-        }@else {
-        <a href="#">Like</a>
+        }@else if(!hasLiked) {
+        <a (click)="handleLikeBtn()">Like</a>
+        }@else{
+            <p>You have already Liked this post</p>
         }
 
     </div>

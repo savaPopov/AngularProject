@@ -50,4 +50,23 @@ export class ApiService {
         return this.http.put(`http://localhost:3030/data/hikes/${hikeId}`, payload, { headers })
     }
 
+    like(hikeId: string) {
+        const token = this.userService.getToken()
+        const headers = new HttpHeaders().set('X-Authorization', `${token}`)
+
+        return this.http.post(`http://localhost:3030/data/likes`, { hikeId }, { headers })
+
+    }
+
+    getAllLikes(hikeId: string) {
+        const params = new URLSearchParams({
+            where: `hikeId="${hikeId}"`,
+            load: `author=_ownerId:users`,
+        })
+
+        return this.http.get(`http://localhost:3030/data/likes?${params.toString()}`)
+    }
+
+
+
 }

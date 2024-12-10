@@ -4,6 +4,9 @@ import { HeaderComponent } from '../header/header.component';
 import { Hike } from '../types/hike';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
+import { UserService } from '../user/user.service';
+import { User } from '../types/user';
+import { combineLatestWith } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
@@ -14,8 +17,9 @@ import { ApiService } from '../api.service';
 })
 export class EditComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private userService: UserService) { }
   hike = {} as Hike;
+  user = {} as any
   //TODO add validation
   form = new FormGroup({
     title: new FormControl('', [Validators.required,]),
@@ -31,7 +35,12 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     const hikeId = this.route.snapshot.params['hikeId']
 
-    this.apiService.getSingleHike(hikeId).subscribe((hike) => {
+    const hike$ = this.apiService.getSingleHike(hikeId)
+    const user$ = this.userService.getProfile()
+
+
+    hike$.pipe(combineLatestWith(user$)).subscribe(([hike,user])=>{
+      this.user = user
       this.hike = hike
       this.form.patchValue({
         title: hike.title,
@@ -42,7 +51,13 @@ export class EditComponent implements OnInit {
         description: hike.description,
         location: hike.location
       })
+
+      if(this.user._id != this.hike._ownerId){
+        this.router.navigate(['/catalog'])
+      }
     })
+
+
   }
 
   update() {

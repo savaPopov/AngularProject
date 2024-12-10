@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Hike } from '../types/hike';
 import { UserService } from '../user/user.service';
 import { User } from '../types/user';
-import { combineLatestWith, of } from 'rxjs';
+import { combineLatest, combineLatestWith, of } from 'rxjs';
 
 @Component({
   selector: 'app-details',
@@ -17,48 +17,20 @@ import { combineLatestWith, of } from 'rxjs';
 export class DetailsComponent implements OnInit {
   hike = {} as Hike;
   user = {} as any;
+  likes = [] as any
+
   isLogged: boolean = false;
   isOwner: boolean = false;
+  hasLiked: boolean = false;
   showDeleteModal: boolean = false;
 
   constructor(private apiService: ApiService, private route: ActivatedRoute, private userService: UserService, private router: Router) { }
-
-
-
-  // ngOnInit(): void {
-  //   const id = this.route.snapshot.params['hikeId']
-  //   this.isLogged = this.userService.isLogged;
-
-  //   if (this.isLogged) {
-  //     this.userService.getProfile().subscribe((profile) => {
-  //       this.user = profile
-  //     })
-  //   }
-
-
-  //   this.apiService.getSingleHike(id).subscribe((h) => {
-  //     this.hike = h;
-  //     if (this.user != undefined && this.user._id == this.hike._ownerId) {
-  //       this.isOwner = true
-  //     }
-  //     else {
-  //       this.isOwner = false;
-  //     }
-
-  //     console.log('ownerId->', h._ownerId)
-  //     console.log('userId->', this.user._id)
-  //     console.log('is it owner?', this.isOwner)
-  //   })
-
-  //   if (this.user._id == this.hike._ownerId) {
-  //     this.isOwner = true;
-  //   }
-  // }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['hikeId'];
     this.isLogged = this.userService.isLogged;
 
+    const likes$ = this.apiService.getAllLikes(id)
     const hike$ = this.apiService.getSingleHike(id);
     let user$ = of({} as any);
 
@@ -66,18 +38,25 @@ export class DetailsComponent implements OnInit {
       user$ = this.userService.getProfile();
     }
 
-    hike$.pipe(
-      combineLatestWith(user$)
-    ).subscribe(([hike, user]) => {
-      this.hike = hike;
-      this.user = user;
+
+    combineLatest([likes$, hike$, user$]).subscribe(([likes, hike, user]) => {
+      this.hike = hike
+      this.user = user
+      this.likes = likes
+
 
       if (user && user._id === hike._ownerId) {
         this.isOwner = true;
-      } else {
-        this.isOwner = false;
       }
-    });
+
+      this.hasLiked = this.likes.some((x: any) => x._ownerId == this.user._id)
+      console.log(this.user._id)
+      console.log(this.hasLiked)
+      console.log(this.likes.length)
+
+      console.log(this.likes)
+    })
+
   }
 
 
@@ -99,6 +78,16 @@ export class DetailsComponent implements OnInit {
         this.router.navigate(['/catalog'])
       })
     }
+  }
+
+  handleLikeBtn() {
+    this.apiService.like(this.hike._id).subscribe((response) => {
+      console.log(response)
+      this.likes = [...this.likes, response]
+
+      this.hasLiked = true
+
+    })
   }
 
 
