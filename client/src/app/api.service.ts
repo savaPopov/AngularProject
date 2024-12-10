@@ -43,4 +43,11 @@ export class ApiService {
         return this.http.delete(`http://localhost:3030/data/hikes/${id}`, { headers })
     }
 
+    updateHike(hikeId: string, title: string, elavation: string, distance: string, imageUrl: string, mountain: string, description: string, location: string) {
+        const token = this.userService.getToken()
+        const headers = new HttpHeaders().set('X-Authorization', `${token}`)
+        const payload = { title, elavation, distance, imageUrl, mountain, description, location };
+        return this.http.put(`http://localhost:3030/data/hikes/${hikeId}`, payload, { headers })
+    }
+
 }

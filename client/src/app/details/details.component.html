@@ -46,7 +46,7 @@
     @if(isLogged){
     <div class="buttons">
         @if(isOwner){
-        <a href="#">Edit</a>
+        <a [routerLink]="['/edit', hike._id]">Edit</a>
         <a (click)="toggleDelete()">Delete</a>
         }@else {
         <a href="#">Like</a>

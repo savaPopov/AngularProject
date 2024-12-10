@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { ApiService } from '../api.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Hike } from '../types/hike';
 import { UserService } from '../user/user.service';
 import { User } from '../types/user';
@@ -10,7 +10,7 @@ import { combineLatestWith, of } from 'rxjs';
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [HeaderComponent],
+  imports: [HeaderComponent, RouterLink],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })

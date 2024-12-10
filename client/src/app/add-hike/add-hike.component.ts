@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrl: './add-hike.component.css'
 })
 export class AddHikeComponent {
+  //TODO add validation
   constructor(private apiService: ApiService, private router: Router) { }
   form = new FormGroup({
     title: new FormControl('', [Validators.required,]),
