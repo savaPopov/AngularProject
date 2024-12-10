@@ -6,11 +6,12 @@ import { Hike } from '../types/hike';
 import { UserService } from '../user/user.service';
 import { User } from '../types/user';
 import { combineLatest, combineLatestWith, of } from 'rxjs';
+import { MapComponent } from "./google-maps/google-maps.component";
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [HeaderComponent, RouterLink],
+  imports: [HeaderComponent, RouterLink, MapComponent],
   templateUrl: './details.component.html',
   styleUrl: './details.component.css'
 })
