@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ApiService } from '../api.service';
 import { UserService } from '../user/user.service';
 import { Router } from '@angular/router';
+import { coordinatesValidator } from '../utils/coordinates.validator';
 
 @Component({
   selector: 'app-add-hike',
@@ -16,17 +17,56 @@ export class AddHikeComponent {
   //TODO add validation
   constructor(private apiService: ApiService, private router: Router) { }
   form = new FormGroup({
-    title: new FormControl('', [Validators.required,]),
-    elavation: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    distance: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    title: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    elavation: new FormControl('', [Validators.required, Validators.max(10000)]),
+    distance: new FormControl('', [Validators.required, Validators.max(1000)]),
     imageUrl: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    mountain: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    mountain: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    location: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    location: new FormControl('', [Validators.required, Validators.minLength(5), coordinatesValidator()]),
   })
 
 
+  isFieldTextMissing(controlName: string) {
+
+    return (
+      this.form.get(controlName)?.touched &&
+      this.form.get(controlName)?.errors?.['required']
+    )
+
+  }
+
+  fieldMinLength(controlName: string) {
+    return (
+      this.form.get(controlName)?.touched &&
+      this.form.get(controlName)?.errors?.['minlength']
+    )
+  }
+
+  fieldMaxNumber(controlName: string) {
+    return (
+      this.form.get(controlName)?.touched &&
+      this.form.get(controlName)?.errors?.['max']
+    )
+  }
+
+  coordinatesError() {
+
+
+    return (
+      this.form.get('location')?.touched &&
+      this.form.get('location')?.errors?.['coordinatesValidator']
+    )
+  }
+
+
   create() {
+    console.log(this.form.value)
+    console.log(this.form.invalid)
+    if (this.form.invalid) {
+      return
+    }
+
     const { title, elavation, distance, imageUrl, mountain, description, location } = this.form.value
     this.apiService.createHike(title!, elavation!, distance!, imageUrl!, mountain!, description!, location!).subscribe((response) => {
       this.router.navigate(['/catalog'])

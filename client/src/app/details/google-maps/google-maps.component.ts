@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { RouterModule } from '@angular/router';
 import { extractCoordinates } from '../../utils/extractCoordinates';
 
 
@@ -40,6 +39,7 @@ export class MapComponent {
 
 
   ngOnInit(): void {
+    console.log(this.location)
     const coordinates = extractCoordinates(this.location)
 
     if (coordinates) {

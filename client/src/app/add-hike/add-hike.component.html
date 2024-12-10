@@ -1,52 +1,117 @@
 <!-- <div class="heroSection"> -->
-    <app-header></app-header>
-    <div class="formContainer">
-        <form [formGroup]="form" (ngSubmit)="create()">
-            <h2>Create your own Hike!</h2>
+<app-header></app-header>
+<div class="formContainer">
+    <form [formGroup]="form" (ngSubmit)="create()">
+        <h2>Create your own Hike!</h2>
 
-            <div class="field">
-                <label for="email">Title</label>
-                <input type="email" name="email" id="email" required placeholder="savaqk@gmail.com" formControlName="title">
-            </div>
-            <!-- <p class="input-error">There is an Error with email</p>
-            <p class="input-error">There is an Error with email</p> -->
+        <div class="field">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required placeholder="Ivan Vazov" formControlName="title">
+        </div>
+
+        @if(isFieldTextMissing('title')){
+        <p class="p-error">Title is Required!</p>
+        }
+
+        @if(fieldMinLength('title')){
+        <p class="p-error">Should be at least 5 charachters!</p>
+        }
 
 
-            <div class="field">
-                <label for="password">Elavation</label>
-                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="elavation">
 
-            </div>
+        <div class="field">
+            <label for="elavation">Elavation in Metres</label>
+            <input type="number" name="elavation" id="elavation" required placeholder="1234" min="1"
+                formControlName="elavation">
+        </div>
 
-            <div class="field">
-                <label for="password">Distance</label>
-                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="distance">
 
-            </div>
-            <div class="field">
-                <label for="password">ImageUrl</label>
-                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="imageUrl">
+        @if(isFieldTextMissing('elavation')){
+        <p class="p-error">Elavation is Required!</p>
+        }
 
-            </div>
-            <div class="field">
-                <label for="password">Mountain</label>
-                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="mountain">
+        @if(fieldMaxNumber('elavation')){
+        <p class="p-error">Elavation Must be below 10000 metres</p>
+        }
 
-            </div>
-            <div class="field">
-                <label for="password">Description</label>
-                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="description">
 
-            </div>
-            <div class="field">
-                <label for="password">Location</label>
-                <input type="password" name="password" id="password" required placeholder="123456789" formControlName="location">
+        <div class="field">
+            <label for="distance">Distance in hours</label>
+            <input type="number" name="distance" id="distance" required placeholder="10 hours.." formControlName="distance" min="1">
 
-            </div>
+        </div>
 
-            <!-- <p class="p-error">There is an Error with email</p> -->
-            <!-- <p class="p-error">There is an Error with email</p>  -->
-            <input type="submit" value="Get Started">
-        </form>
-    </div>
+
+
+        @if(isFieldTextMissing('distance')){
+        <p class="p-error">Distance is Required!</p>
+        }
+
+        @if(fieldMaxNumber('distance')){
+        <p class="p-error">Distance must be below 1000 hours</p>
+        }
+
+        <div class="field">
+            <label for="imageUrl">ImageUrl</label>
+            <input type="url" name="imageUrl" id="imageUrl" required placeholder="https://blabla"
+                formControlName="imageUrl">
+
+        </div>
+
+        @if(isFieldTextMissing('imageUrl')){
+        <p class="p-error">ImageUrl is Required!</p>
+        }
+
+        <!-- TODO VALIDATE HTTP -->
+
+
+        <div class="field">
+            <label for="mountain">Mountain</label>
+            <input type="text" name="mountain" id="mountain" required placeholder="Stara Planina"
+                formControlName="mountain">
+
+        </div>
+        @if(isFieldTextMissing('mountain')){
+        <p class="p-error">Mountain is Required!</p>
+        }
+        @if(fieldMinLength('mountain')){
+        <p class="p-error">Should be at least 3 charachters!</p>
+        }
+
+        <div class="field">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="description" required placeholder="A lot of room..."
+                formControlName="description">
+
+        </div>
+
+        @if(isFieldTextMissing('description')){
+        <p class="p-error">Description is Required!</p>
+
+        }
+
+        @if(fieldMinLength('description')){
+        <p class="p-error">Should be at least 5 charachters!</p>
+        }
+        <div class="field">
+            <label for="location">Location</label>
+            <input type="text" name="location" id="location" required placeholder="42.759184687098, 25.116601627988054"
+                formControlName="location">
+
+        </div>
+
+        <!-- TODO VALIDATE EXTRACT FUNCTION -->
+        @if(isFieldTextMissing('location')){
+        <p class="p-error">Location is Required!</p>
+        }
+
+        @if(coordinatesError()){
+        <p class="p-error">Location should fit the format</p>
+        }
+
+        <!-- <p class="p-error">There is an Error with email</p> -->
+        <!-- <p class="p-error">There is an Error with email</p>  -->
+        <input type="submit" value="Get Started">
+    </form>
+</div>
 <!-- </div> -->

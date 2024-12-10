@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Hike } from '../types/hike';
 import { UserService } from '../user/user.service';
 import { User } from '../types/user';
-import { combineLatest, combineLatestWith, of } from 'rxjs';
+import { combineLatest, of } from 'rxjs';
 import { MapComponent } from "./google-maps/google-maps.component";
 
 @Component({
