@@ -30,16 +30,11 @@
     </div>
     <!-- <div class="container"> -->
     <h1>{{hike.title}}</h1>
-    <h3>Basic Information of the Hut:</h3>
+    <h3 class="headings">Basic Information of the Hut:</h3>
     <div class="info">
-        <p>Elavation: {{hike.elavation}}</p>
-        <p>Distance: {{hike.distance}}</p>
+        <p>Elavation: {{hike.elavation}} metres</p>
+        <p>Distance: {{hike.distance}} hours from the nearest parking</p>
         <p>Mountain: {{hike.mountain}}</p>
-        <p>Location: {{hike.location}}</p>
-        <!-- <p>Description: {{hike.description}}</p> -->
-        <!-- <div class="imgContainerCard">
-                <img src="assets/images/put karta.png">
-             </div> -->
     </div>
     <div class="description">
         <p>Description: {{hike.description}}</p>
@@ -65,7 +60,44 @@
     </div>
     }
 
+    <div class="commentSection">
+        <div class="details-comments">
+            <h2>Comments:</h2>
+            @if(comments.length>0){
+            @for (item of comments; track $index) {
+            <li class="comment">
+                <p>{{item.author?.email}}: </p>
+                <p>{{item.text}}</p>
+            </li>
 
-    <!-- </div> -->
+            }
+            }@else {
+            <h3>No Comments yet...</h3>
+            }
+
+
+        </div>
+        @if(isLogged){
+        <article class="create-comment">
+            <!-- <label>Add new Comment: </label> -->
+            <h2>Add new Comment: </h2>
+            <form class="form" [formGroup]="form" (ngSubmit)="createComment()">
+                <textarea name="comment" placeholder="Very cool hike!" name="comment" formControlName="comment">
+
+                </textarea>
+
+                @if( this.form.get('comment')?.touched &&
+                this.form.get('comment')?.errors?.['minlength']){
+                <p class="p-error">The comment must be at least 3 charachters!</p>
+                }
+
+                <input class="btn submit" type="submit" value="Add Comment">
+            </form>
+        </article>
+        }
+
+    </div>
+
+
 
 </div>

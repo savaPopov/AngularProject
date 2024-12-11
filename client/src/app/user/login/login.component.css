@@ -60,22 +60,15 @@ input[type="submit"]:hover {
     background: #a39595;
 }
 
-.input-error {
-    border: 3px solid red;
-    outline: red;
-}
 
-
-.p-error {
-    color: red;
-    font-size: 1.3rem;
-    text-align: center;
-}
 .background {
     z-index: -1;
     position: absolute;
     height: 100%;
     width: 100%;
+}
+.input-error {
+    border: 3px solid red;
 }
 
 img {
@@ -83,3 +76,4 @@ img {
     height: 100%;
     object-fit: cover;
 }
+

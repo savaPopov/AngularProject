@@ -67,6 +67,22 @@ export class ApiService {
         return this.http.get(`http://localhost:3030/data/likes?${params.toString()}`)
     }
 
+    createComment(hikeId: string, text: string) {
+        const token = this.userService.getToken()
+        const headers = new HttpHeaders().set('X-Authorization', `${token}`)
+
+        return this.http.post(`http://localhost:3030/data/comments`, { hikeId, text }, { headers })
+    }
+
+    getAllComments(hikeId: string) {
+        const params = new URLSearchParams({
+            where: `hikeId="${hikeId}"`,
+            load: `author=_ownerId:users`,
+        })
+
+        return this.http.get(`http://localhost:3030/data/comments?${params.toString()}`)
+    }
+
 
 
 }

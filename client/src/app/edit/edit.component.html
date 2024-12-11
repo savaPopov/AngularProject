@@ -1,58 +1,131 @@
 <!-- <div class="heroSection"> -->
-<app-header></app-header>
-<div class="formContainer">
-    <form [formGroup]="form" (ngSubmit)="update()">
-        <h2>Create your own Hike!</h2>
-
-        <div class="field">
-            <label for="email">Title</label>
-            <input type="email" name="email" id="email" required placeholder="savaqk@gmail.com" formControlName="title">
-        </div>
-        <!-- <p class="input-error">There is an Error with email</p>
-            <p class="input-error">There is an Error with email</p> -->
-
-
-        <div class="field">
-            <label for="password">Elavation</label>
-            <input type="text" name="password" id="password" required placeholder="123456789"
-                formControlName="elavation" >
-
-        </div>
-
-        <div class="field">
-            <label for="password">Distance</label>
-            <input type="text" name="password" id="password" required placeholder="123456789"
-                formControlName="distance">
-
-        </div>
-        <div class="field">
-            <label for="password">ImageUrl</label>
-            <input type="text" name="password" id="password" required placeholder="123456789"
-                formControlName="imageUrl">
-
-        </div>
-        <div class="field">
-            <label for="password">Mountain</label>
-            <input type="text" name="password" id="password" required placeholder="123456789"
-                formControlName="mountain">
-
-        </div>
-        <div class="field">
-            <label for="password">Description</label>
-            <input type="text" name="password" id="password" required placeholder="123456789"
-                formControlName="description">
-
-        </div>
-        <div class="field">
-            <label for="password">Location</label>
-            <input type="text" name="password" id="password" required placeholder="123456789"
-                formControlName="location">
-
-        </div>
-
-        <!-- <p class="p-error">There is an Error with email</p> -->
-        <!-- <p class="p-error">There is an Error with email</p>  -->
-        <input type="submit" value="Get Started">
-    </form>
-</div>
-<!-- </div> -->
+    <app-header></app-header>
+    <div class="formContainer">
+        <form [formGroup]="form" (ngSubmit)="update()">
+            <h2>Edit your Hike!</h2>
+    
+            <div class="field">
+                <label for="title">Title</label>
+                <input type="text" name="title" id="title" required placeholder="Ivan Vazov" formControlName="title"
+                    [class]="isFieldTextMissing('title') || fieldMinLength('title') ? 'input-error' : '' ">
+            </div>
+    
+            @if(isFieldTextMissing('title')){
+            <p class="p-error">Title is Required!</p>
+            }
+    
+            @if(fieldMinLength('title')){
+            <p class="p-error">Should be at least 5 charachters!</p>
+            }
+    
+    
+    
+            <div class="field">
+                <label for="elavation">Elavation in Metres</label>
+                <input type="number" name="elavation" id="elavation" required placeholder="1234" min="1"
+                    formControlName="elavation"
+                    [class]="isFieldTextMissing('elavation') || fieldMaxNumber('elavation') || fieldMinNumber('elavation') ? 'input-error' : '' ">
+            </div>
+    
+    
+            @if(isFieldTextMissing('elavation')){
+            <p class="p-error">Elavation is Required!</p>
+            }
+    
+            @if(fieldMaxNumber('elavation')){
+            <p class="p-error">Elavation Must be below 10000 metres</p>
+            }
+    
+            @if(fieldMinNumber('elavation')){
+            <p class="p-error">Elavation cant be a negative number!</p>
+            }
+    
+    
+            <div class="field">
+                <label for="distance">Distance in hours</label>
+                <input type="number" name="distance" id="distance" required placeholder="10 hours.."
+                    formControlName="distance" min="1"
+                    [class]="isFieldTextMissing('distance') || fieldMaxNumber('distance') || fieldMinNumber('distance') ? 'input-error' : '' ">
+    
+            </div>
+    
+    
+    
+            @if(isFieldTextMissing('distance')){
+            <p class="p-error">Distance is Required!</p>
+            }
+    
+            @if(fieldMaxNumber('distance')){
+            <p class="p-error">Distance must be below 1000 hours</p>
+            }
+    
+            @if(fieldMinNumber('distance')){
+            <p class="p-error">Distance cant be a negative number!</p>
+            }
+    
+            <div class="field">
+                <label for="imageUrl">ImageUrl</label>
+                <input type="url" name="imageUrl" id="imageUrl" required placeholder="https://blabla"
+                    formControlName="imageUrl"
+                    [class]="isFieldTextMissing('imageUrl') || isHttpValid() ? 'input-error' : '' ">
+    
+            </div>
+    
+            @if(isFieldTextMissing('imageUrl')){
+            <p class="p-error">ImageUrl is Required!</p>
+            }
+    
+            @if(isHttpValid()){
+            <p class="p-error">ImageUrl must be a valid Url!</p>
+            }
+    
+    
+    
+            <div class="field">
+                <label for="mountain">Mountain</label>
+                <input type="text" name="mountain" id="mountain" required placeholder="Stara Planina"
+                    formControlName="mountain"
+                    [class]="isFieldTextMissing('mountain') || fieldMinLength('mountain') ? 'input-error' : '' ">
+    
+            </div>
+            @if(isFieldTextMissing('mountain')){
+            <p class="p-error">Mountain is Required!</p>
+            }
+            @if(fieldMinLength('mountain')){
+            <p class="p-error">Should be at least 3 charachters!</p>
+            }
+    
+            <div class="field">
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description" required placeholder="A lot of room..."
+                    formControlName="description"
+                    [class]="isFieldTextMissing('description') || fieldMinLength('description') ? 'input-error' : '' ">
+    
+            </div>
+    
+            @if(isFieldTextMissing('description')){
+            <p class="p-error">Description is Required!</p>
+    
+            }
+    
+            @if(fieldMinLength('description')){
+            <p class="p-error">Should be at least 5 charachters!</p>
+            }
+            <div class="field">
+                <label for="location">Location</label>
+                <input type="text" name="location" id="location" required placeholder="42.759184687098, 25.116601627988054"
+                    formControlName="location"
+                    [class]="isFieldTextMissing('location') || coordinatesError() ? 'input-error' : '' ">
+    
+            </div>
+    
+            @if(isFieldTextMissing('location')){
+            <p class="p-error">Location is Required!</p>
+            }
+    
+            @if(coordinatesError()){
+            <p class="p-error">Location should fit the format</p>
+            }
+            <input type="submit" value="Get Started">
+        </form>
+    </div>

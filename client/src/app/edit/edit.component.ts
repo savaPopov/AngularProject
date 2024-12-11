@@ -7,6 +7,8 @@ import { ApiService } from '../api.service';
 import { UserService } from '../user/user.service';
 import { User } from '../types/user';
 import { combineLatestWith } from 'rxjs';
+import { coordinatesValidator } from '../utils/coordinates.validator';
+import { httpUrlValidator } from '../utils/httpUrl.validator';
 
 @Component({
   selector: 'app-edit',
@@ -20,15 +22,15 @@ export class EditComponent implements OnInit {
   constructor(private route: ActivatedRoute, private apiService: ApiService, private router: Router, private userService: UserService) { }
   hike = {} as Hike;
   user = {} as any
-  //TODO add validation
+
   form = new FormGroup({
-    title: new FormControl('', [Validators.required,]),
-    elavation: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    distance: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    imageUrl: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    mountain: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    title: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    elavation: new FormControl('', [Validators.required, Validators.max(10000), Validators.min(0)]),
+    distance: new FormControl('', [Validators.required, Validators.max(1000), Validators.min(0)]),
+    imageUrl: new FormControl('', [Validators.required, Validators.minLength(5), httpUrlValidator()]),
+    mountain: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    location: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    location: new FormControl('', [Validators.required, Validators.minLength(5), coordinatesValidator()]),
   })
 
 
@@ -39,7 +41,7 @@ export class EditComponent implements OnInit {
     const user$ = this.userService.getProfile()
 
 
-    hike$.pipe(combineLatestWith(user$)).subscribe(([hike,user])=>{
+    hike$.pipe(combineLatestWith(user$)).subscribe(([hike, user]) => {
       this.user = user
       this.hike = hike
       this.form.patchValue({
@@ -52,13 +54,58 @@ export class EditComponent implements OnInit {
         location: hike.location
       })
 
-      if(this.user._id != this.hike._ownerId){
+      if (this.user._id != this.hike._ownerId) {
         this.router.navigate(['/catalog'])
       }
     })
 
 
   }
+
+  isFieldTextMissing(controlName: string) {
+
+    return (
+      this.form.get(controlName)?.touched &&
+      this.form.get(controlName)?.errors?.['required']
+    )
+
+  }
+
+  fieldMinLength(controlName: string) {
+    return (
+      this.form.get(controlName)?.touched &&
+      this.form.get(controlName)?.errors?.['minlength']
+    )
+  }
+
+  fieldMaxNumber(controlName: string) {
+    return (
+      this.form.get(controlName)?.touched &&
+      this.form.get(controlName)?.errors?.['max']
+    )
+  }
+
+  fieldMinNumber(controlName: string) {
+    return (this.form.get(controlName)?.touched &&
+      this.form.get(controlName)?.errors?.['min'])
+  }
+
+  coordinatesError() {
+
+
+    return (
+      this.form.get('location')?.touched &&
+      this.form.get('location')?.errors?.['coordinatesValidator']
+    )
+  }
+
+  isHttpValid() {
+    return (
+      this.form.get('imageUrl')?.touched &&
+      this.form.get('imageUrl')?.errors?.['httpUrlValidator']
+    )
+  }
+
 
   update() {
     const { title, elavation, distance, imageUrl, mountain, description, location } = this.form.value

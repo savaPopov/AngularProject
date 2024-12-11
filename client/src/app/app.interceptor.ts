@@ -15,29 +15,4 @@ export const appInterceptor: HttpInterceptorFn = (req, next) => {
     }
 
     return next(req)
-
-    //   return next(req).pipe(
-    //     catchError((err) => {
-    //     //   console.log(err.message);
-    //       // Return an empty observable or rethrow the error to prevent further propagation
-    //     //   console.log
-    //       return throwError(() => new Error(err.status));
-    //     })
-    //   );
-
-    // const errorMsgService = inject(ErrorMsgService)
-    // const router = inject(Router)
-
-    // return next(req).pipe(
-    //   catchError((err) => {
-    //     if (err.status === 401) {
-    //       router.navigate(['/home'])
-    //     } else {
-    //       errorMsgService.setError(err)
-    //       router.navigate(['/error'])
-    //     }
-
-    //     return [err]
-    //   })
-    // );
 };
