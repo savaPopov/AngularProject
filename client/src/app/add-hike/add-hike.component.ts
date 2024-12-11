@@ -5,6 +5,7 @@ import { ApiService } from '../api.service';
 import { UserService } from '../user/user.service';
 import { Router } from '@angular/router';
 import { coordinatesValidator } from '../utils/coordinates.validator';
+import { httpUrlValidator } from '../utils/httpUrl.validator';
 
 @Component({
   selector: 'app-add-hike',
@@ -18,9 +19,9 @@ export class AddHikeComponent {
   constructor(private apiService: ApiService, private router: Router) { }
   form = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    elavation: new FormControl('', [Validators.required, Validators.max(10000)]),
-    distance: new FormControl('', [Validators.required, Validators.max(1000)]),
-    imageUrl: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    elavation: new FormControl('', [Validators.required, Validators.max(10000), Validators.min(0)]),
+    distance: new FormControl('', [Validators.required, Validators.max(1000), Validators.min(0)]),
+    imageUrl: new FormControl('', [Validators.required, Validators.minLength(5), httpUrlValidator()]),
     mountain: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', [Validators.required, Validators.minLength(5)]),
     location: new FormControl('', [Validators.required, Validators.minLength(5), coordinatesValidator()]),
@@ -50,12 +51,24 @@ export class AddHikeComponent {
     )
   }
 
+  fieldMinNumber(controlName: string) {
+    return (this.form.get(controlName)?.touched &&
+      this.form.get(controlName)?.errors?.['min'])
+  }
+
   coordinatesError() {
 
 
     return (
       this.form.get('location')?.touched &&
       this.form.get('location')?.errors?.['coordinatesValidator']
+    )
+  }
+
+  isHttpValid() {
+    return (
+      this.form.get('imageUrl')?.touched &&
+      this.form.get('imageUrl')?.errors?.['httpUrlValidator']
     )
   }
 
