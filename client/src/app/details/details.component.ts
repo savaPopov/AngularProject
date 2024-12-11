@@ -97,7 +97,6 @@ export class DetailsComponent implements OnInit {
 
   handleLikeBtn() {
     this.likesApi.like(this.hike._id).subscribe((response) => {
-      console.log(response)
       this.likes = [...this.likes, response]
 
       this.hasLiked = true
@@ -112,7 +111,6 @@ export class DetailsComponent implements OnInit {
     }
 
     const { comment } = this.form.value
-    console.log(comment)
 
     this.commentsApi.createComment(this.hike._id, comment!).subscribe((response) => {
       const newComment = { ...response, author: { email: this.user.email } }

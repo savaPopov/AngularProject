@@ -1,10 +1,10 @@
-main{
+main {
     display: flex;
     flex-direction: column;
     gap: 50px;
 }
 
-.form-container{
+.form-container {
 
     width: 100%;
     margin: 0 auto;
@@ -13,21 +13,21 @@ main{
     flex-direction: column;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     gap: 40px;
 
 }
 
-form > h2 {
+form>h2 {
     color: #FFF;
     font-size: 1.5rem;
     font-weight: 700;
     font-family: sans-serif;
 }
 
-form > input {
+form>input {
     border-radius: 20px;
     padding: 20px;
     margin: 0 100px;
@@ -49,7 +49,7 @@ form > input {
     padding-bottom: 100px;
 }
 
-.catalog-card{
+.catalog-card {
     display: flex;
     flex-direction: column;
     flex: 0 0 30%;
@@ -57,30 +57,28 @@ form > input {
     gap: 20px;
 }
 
-.img-container{
+.img-container {
     z-index: -1;
     height: 100%;
     width: 100%;
 }
 
-.catalog-card > h3{
+.catalog-card>h3 {
     color: #FFF;
     font-size: 2rem;
 }
 
-.catalog-card > a {
+.catalog-card>a {
     background: #d9a724;
     padding: 15px 25px;
     border-radius: 10px;
     font-size: 1.3rem;
     text-transform: uppercase;
     font-weight: 700;
-    
+
 }
 
 img {
-    height: 100%;
     width: 100%;
+    height: 650px;
 }
-
-

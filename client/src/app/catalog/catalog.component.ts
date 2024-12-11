@@ -24,9 +24,7 @@ export class CatalogComponent implements OnInit {
     this.apiService.getHikes().subscribe((h) => {
       this.hikes = h;
       this.filteredHikes = h;
-      // console.log(h)
       const token = this.userService.getToken()
-      // console.log(token)
     })
   }
 
