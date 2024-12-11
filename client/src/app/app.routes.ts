@@ -15,7 +15,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent, canActivate: [NoAuthGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [NoAuthGuard] },
 
-    // { path: 'catalog', component: CatalogComponent },
+
 
     {
         path: 'catalog', children: [
@@ -23,6 +23,8 @@ export const routes: Routes = [
             { path: ':hikeId', component: DetailsComponent }
         ]
     },
+
+    //TODO 404 About loader Pages 
 
     { path: 'edit/:hikeId', component: EditComponent, canActivate: [AuthGuard] },
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { UserService } from '../user/user.service';
+import { UserService } from '../api/user.service';
 
 @Component({
   selector: 'app-header',
@@ -12,18 +12,20 @@ import { UserService } from '../user/user.service';
 
 export class HeaderComponent implements OnInit {
   isLogged: boolean = false;
-  constructor(private userService: UserService, private router: Router) { }
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     const checkLoggingStatus = this.userService.isLogged
-    // console.log('ARE YOU LOGGED?', checkLoggingStatus)
+
     this.isLogged = checkLoggingStatus;
   }
 
   logout() {
     this.userService.logout().subscribe((response) => {
-      // console.log('RESPONSEEEEEEEEEEE')
-      // console.log(response)
       this.userService.deleteToken()
       this.router.navigate(['/']).then(() => {
         window.location.reload();

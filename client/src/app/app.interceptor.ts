@@ -1,5 +1,5 @@
 import { HttpInterceptorFn } from "@angular/common/http"
-import { catchError, throwError } from "rxjs";
+
 
 const apiUrl = 'http://localhost:3030/users'
 const API = '/api'

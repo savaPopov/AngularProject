@@ -77,8 +77,8 @@ img {
 
 .liked-posts-container>h2 {
     font-size: 2.5rem;
-    color: #FFF;
     font-family: 'Poppins', sans-serif;
+    color: #d9a724;
 }
 
 .liked-Cards {
@@ -101,4 +101,10 @@ img {
 
 .card>img {
     object-fit: cover;
+}
+
+.headings {
+
+    font-size: 2rem;
+    font-weight: 700;
 }

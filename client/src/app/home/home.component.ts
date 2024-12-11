@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { Hike } from '../types/hike';
-import { ApiService } from '../api.service';
+import { ApiService } from '../api/data.service';
 import { RouterLink } from '@angular/router';
-import { UserService } from '../user/user.service';
-import { UserForAuth } from '../types/user';
+import { UserService } from '../api/user.service';
+
 
 
 @Component({
@@ -22,14 +22,9 @@ export class HomeComponent implements OnInit {
   constructor(private apiService: ApiService, private userService: UserService) { }
 
   ngOnInit(): void {
-    // this.userService.getProfile().subscribe((response) => {
-    //   this.profile = response;
-    //   console.log(response)
-    // })
 
     this.apiService.getRecentHikes().subscribe((h) => {
       this.hikes = h
-      console.log(h)
     })
 
 

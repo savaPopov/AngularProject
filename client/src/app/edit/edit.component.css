@@ -34,6 +34,7 @@
 
 .formContainer>form>h2 {
     text-align: center;
+    font-size: 2.5rem;
     /* background: transparent; */
 }
 
@@ -54,19 +55,10 @@ input {
 input[type="submit"] {
     font-size: 1.5rem;
     font-weight: 600;
+    background: #d9a724;
 }
 
 
 input[type="submit"]:hover {
-    background: #a39595;
-}
-
-.input-error {
-    border: 3px solid red;
-}
-
-.p-error {
-    color: red;
-    font-size: 1.3rem;
-    text-align: center;
+    background: #cfaf5e;
 }

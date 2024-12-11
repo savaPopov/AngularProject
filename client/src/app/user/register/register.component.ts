@@ -3,7 +3,7 @@ import { HeaderComponent } from '../../header/header.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { matchPasswordsValidator } from '../../utils/match-passwords.validator';
 import { emailValidator } from '../../utils/email.validator';
-import { UserService } from '../user.service';
+import { UserService } from '../../api/user.service';
 import { catchError, of } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -87,11 +87,10 @@ export class RegisterComponent {
 
 
 
-        return of(null)  // Return a fallback value or empty observable
+        return of(null) 
       })
     ).subscribe({
       next: (response) => {
-        console.log(response)
         if (response && response.accessToken) {
           const token = response.accessToken;
           this.userService.storeToken(token);
@@ -99,6 +98,6 @@ export class RegisterComponent {
         }
       },
     });
-    console.log(this.form.value)
+
   }
 }

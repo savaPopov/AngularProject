@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ApiService } from '../api.service';
-import { UserService } from '../user/user.service';
+import { ApiService } from '../api/data.service';
+import { UserService } from '../api/user.service';
 import { Router } from '@angular/router';
 import { coordinatesValidator } from '../utils/coordinates.validator';
 import { httpUrlValidator } from '../utils/httpUrl.validator';

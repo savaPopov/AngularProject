@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../../header/header.component';
-import { FormControl, FormGroup, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { emailValidator } from '../../utils/email.validator';
-import { UserService } from '../user.service';
+import { UserService } from '../../api/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { catchError, of } from 'rxjs';
 
@@ -52,37 +52,19 @@ export class LoginComponent {
       return
     }
 
-
-    console.log(this.form.value)
     const { email, password } = this.form.value;
 
-    // this.userService.login(email!, password!).subscribe((response) => {
-
-    //   const token = response.accessToken;
-    //   console.log('')
-    //   if (token) {
-    //     this.userService.storeToken(token)
-    //     this.router.navigate(['/'])
-    //   }
-
-    //   // console.log(response)
-
-
-    // })
 
     this.userService.login(email!, password!).pipe(
       catchError((err) => {
 
-        console.log(err);
-        if(err.error.code==403){
+        if (err.error.code == 403) {
           this.error = err.error.message;
-        }else{
+        } else {
           this.error = `Unknown Error: ${err.error.message}`
         }
 
-        
-      
-        return of(null)  // Return a fallback value or empty observable
+        return of(null)
       })
     ).subscribe({
       next: (response) => {

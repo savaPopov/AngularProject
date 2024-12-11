@@ -1,13 +1,15 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
-import { ApiService } from '../api.service';
+import { ApiService } from '../api/data.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Hike } from '../types/hike';
-import { UserService } from '../user/user.service';
+import { UserService } from '../api/user.service';
 import { User } from '../types/user';
 import { combineLatest, of } from 'rxjs';
 import { MapComponent } from "./google-maps/google-maps.component";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommentsApiService } from '../api/comments-api.service';
+import { LikesApiService } from '../api/likes-api.service';
 
 @Component({
   selector: 'app-details',
@@ -31,16 +33,22 @@ export class DetailsComponent implements OnInit {
     comment: new FormControl('', [Validators.required, Validators.minLength(3)]),
   })
 
-  constructor(private apiService: ApiService, private route: ActivatedRoute, private userService: UserService, private router: Router) { }
+  constructor(
+    private apiService: ApiService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private router: Router,
+    private commentsApi: CommentsApiService,
+    private likesApi: LikesApiService,
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['hikeId'];
     this.isLogged = this.userService.isLogged;
 
-    // this.user = { email: '', _id: '' }
 
-    const comments$ = this.apiService.getAllComments(id)
-    const likes$ = this.apiService.getAllLikes(id)
+    const comments$ = this.commentsApi.getAllComments(id)
+    const likes$ = this.likesApi.getAllLikes(id)
     const hike$ = this.apiService.getSingleHike(id);
     let user$ = of({} as any);
 
@@ -50,8 +58,8 @@ export class DetailsComponent implements OnInit {
 
 
     combineLatest([likes$, hike$, comments$, user$]).subscribe(([likes, hike, comments, user]) => {
+
       this.comments = comments
-      console.log(this.comments)
       this.hike = hike
       this.user = user
       this.likes = likes
@@ -62,7 +70,7 @@ export class DetailsComponent implements OnInit {
       }
 
       this.hasLiked = this.likes.some((x: any) => x._ownerId == this.user._id)
-      console.log(comments)
+
     })
 
   }
@@ -88,7 +96,7 @@ export class DetailsComponent implements OnInit {
   }
 
   handleLikeBtn() {
-    this.apiService.like(this.hike._id).subscribe((response) => {
+    this.likesApi.like(this.hike._id).subscribe((response) => {
       console.log(response)
       this.likes = [...this.likes, response]
 
@@ -106,7 +114,7 @@ export class DetailsComponent implements OnInit {
     const { comment } = this.form.value
     console.log(comment)
 
-    this.apiService.createComment(this.hike._id, comment!).subscribe((response) => {
+    this.commentsApi.createComment(this.hike._id, comment!).subscribe((response) => {
       const newComment = { ...response, author: { email: this.user.email } }
       this.comments = [...this.comments, newComment]
 

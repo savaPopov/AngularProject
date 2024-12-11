@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { HeaderComponent } from '../header/header.component';
 import { Hike } from '../types/hike';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../api.service';
-import { UserService } from '../user/user.service';
+import { ApiService } from '../api/data.service';
+import { UserService } from '../api/user.service';
 import { User } from '../types/user';
 import { combineLatestWith } from 'rxjs';
 import { coordinatesValidator } from '../utils/coordinates.validator';

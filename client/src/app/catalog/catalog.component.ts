@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../header/header.component";
 import { RouterLink } from '@angular/router';
-import { ApiService } from '../api.service';
+import { ApiService } from '../api/data.service';
 import { Hike } from '../types/hike';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../user/user.service';
+import { UserService } from '../api/user.service';
 
 @Component({
   selector: 'app-catalog',

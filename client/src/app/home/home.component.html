@@ -17,14 +17,14 @@
     </div>
 
     <div class="liked-posts-container">
-        <h2>Recently Added Huts</h2>
+        <h2 class="headings">Recently Added Huts</h2>
         <div class="liked-Cards">
             @for (hike of hikes; track $index) {
-                <div class="card">
-                    <a [routerLink]="['/catalog', hike._id]" ><img src={{hike.imageUrl}}></a>
-                </div>
+            <div class="card">
+                <a [routerLink]="['/catalog', hike._id]"><img src={{hike.imageUrl}}></a>
+            </div>
             }
-           
+
         </div>
     </div>
 </div>
