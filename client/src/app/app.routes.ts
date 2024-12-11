@@ -8,6 +8,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/noauth.guard';
 import { DetailsComponent } from './details/details.component';
 import { EditComponent } from './edit/edit.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -29,6 +31,10 @@ export const routes: Routes = [
     { path: 'edit/:hikeId', component: EditComponent, canActivate: [AuthGuard] },
 
     { path: 'add-hike', component: AddHikeComponent, canActivate: [AuthGuard] },
+    { path: 'about', component: AboutUsComponent },
 
+
+    { path: '404', component: NotFoundComponent },
+    { path: '**', redirectTo: '/404' },
 ];
 
