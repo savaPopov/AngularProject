@@ -90,6 +90,11 @@
                 this.form.get('comment')?.errors?.['minlength']){
                 <p class="p-error">The comment must be at least 3 charachters!</p>
                 }
+                
+                @if( this.form.get('comment')?.touched &&
+                this.form.get('comment')?.errors?.['maxlength']){
+                <p class="p-error">The comment cant be more than 60 charachters!</p>
+                }
 
                 <input class="btn submit" type="submit" value="Add Comment">
             </form>

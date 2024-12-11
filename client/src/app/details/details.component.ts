@@ -30,7 +30,7 @@ export class DetailsComponent implements OnInit {
   showDeleteModal: boolean = false;
 
   form = new FormGroup({
-    comment: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    comment: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]),
   })
 
   constructor(

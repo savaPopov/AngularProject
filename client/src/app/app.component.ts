@@ -15,5 +15,5 @@ import { DetailsComponent } from "./details/details.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'client';
+  title = 'SavaHikes';
 }

@@ -24,7 +24,7 @@ export const routes: Routes = [
         ]
     },
 
-    //TODO 404 About loader Pages 
+    //TODO 404 About  Pages 
 
     { path: 'edit/:hikeId', component: EditComponent, canActivate: [AuthGuard] },
 
